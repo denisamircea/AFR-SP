@@ -1,0 +1,27 @@
+
+Trace: 86400 events, seed 7   (Darwin-25.1.0-arm64-arm-64bit-Mach-O, Python 3.13.18)
+
+                                         RAW        SK      MASK    AFR-SP
+bytes per record                       422.4     458.4     382.6      90.0
+volume (MB/day)                        36.49     39.60     33.06      7.78
+reduction vs RAW (%)                    0.00     -8.52      9.41     78.69
+PII values stored (of 604800)         604800    604800         0         0
+latency median (us)                     3.88      5.83      5.50      5.96
+latency p99 (us)                        8.58     11.33     10.67      9.67
+AFR-SP incl. checkpoints: 8.04 MB/day (77.98% less than RAW), mean latency incl. checkpoint 7.32 us
+Verification of the full day (s): SK 0.166, MASK 0.131, AFR-SP 0.302
+Clean-log verification findings (must be 0): {'SK': 0, 'MASK': 0, 'AFR_SP': 0}
+
+Tamper scenario                                                   SK  MASK  AFR-SP
+Alter one past record                                            yes   yes     yes
+Delete one record                                                yes   yes     yes
+Swap two adjacent records                                        yes   yes     yes
+Duplicate (replay) a record                                      yes   yes     yes
+Insert a forged record                                           yes   yes     yes
+Truncate the last 30 records                                      NO    NO     yes
+Delete the entire log                                             NO    NO     yes
+Roll back to an older consistent copy                             NO    NO     yes
+Chain key leaked, past record rewritten (key-compromise)         yes    NO     yes
+Detected                                                         6/9  5/9    9/9
+
+wrote compare_results.json

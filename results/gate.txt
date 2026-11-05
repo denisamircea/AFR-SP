@@ -1,0 +1,11 @@
+Sprint 1 (sprint1_ok.py): GATE PASSED   [lint 0.16 ms, admissibility 44.4 ms]
+Sprint 2 (sprint2_bug.py): GATE FAILED   [lint 0.16 ms, admissibility 17.0 ms]
+     line 5 [R1] personal field ['user_email'] passed to log call
+Sprint 3 (sprint3_fix.py): GATE PASSED   [lint 0.12 ms, admissibility 16.8 ms]
+
+Linter evaluation on 20 labelled snippets
+  direct violations detected : 10/10
+  clean snippets flagged     : 0/8  []
+  indirect violations found  : 0/2  (missed: ['PII hidden behind a helper', 'PII built in a variable first'])
+
+wrote gate_results.json

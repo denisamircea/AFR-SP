@@ -1,0 +1,69 @@
+{
+  "sprints": [
+    {
+      "target": "demo/sprint1_ok.py",
+      "violations": [],
+      "lint_passed": true,
+      "admissibility": {
+        "events": 600,
+        "clean_chain_verifies": true,
+        "altered_detected": true,
+        "deleted_detected": true,
+        "passed": true
+      },
+      "passed": true,
+      "lint_ms": 0.16,
+      "admissibility_ms": 44.4
+    },
+    {
+      "target": "demo/sprint2_bug.py",
+      "violations": [
+        [
+          "sprint2_bug.py",
+          5,
+          "R1",
+          "personal field ['user_email'] passed to log call"
+        ]
+      ],
+      "lint_passed": false,
+      "admissibility": {
+        "events": 600,
+        "clean_chain_verifies": true,
+        "altered_detected": true,
+        "deleted_detected": true,
+        "passed": true
+      },
+      "passed": false,
+      "lint_ms": 0.16,
+      "admissibility_ms": 17.0
+    },
+    {
+      "target": "demo/sprint3_fix.py",
+      "violations": [],
+      "lint_passed": true,
+      "admissibility": {
+        "events": 600,
+        "clean_chain_verifies": true,
+        "altered_detected": true,
+        "deleted_detected": true,
+        "passed": true
+      },
+      "passed": true,
+      "lint_ms": 0.12,
+      "admissibility_ms": 16.8
+    }
+  ],
+  "linter_eval": {
+    "direct_total": 10,
+    "direct_detected": 10,
+    "clean_total": 8,
+    "false_positives": 0,
+    "indirect_total": 2,
+    "indirect_detected": 0,
+    "missed": [
+      "PII hidden behind a helper",
+      "PII built in a variable first"
+    ],
+    "false_positive_cases": []
+  }
+}

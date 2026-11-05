@@ -1,0 +1,16 @@
+{
+  "_comment": "Per-field decision table produced by the joint STRIDE/LINDDUN pass (Phase 2). The Privacy Linter (Phase 4) reads the 'drop' entries as its rule set.",
+  "fields": {
+    "user_name":  {"decision": "drop", "aliases": ["username", "full_name", "first_name", "last_name"]},
+    "user_email": {"decision": "drop", "aliases": ["email", "e_mail"]},
+    "patient_id": {"decision": "drop", "aliases": ["patientid", "patient"]},
+    "src_ip":     {"decision": "drop", "aliases": ["ip", "ip_addr", "client_ip", "remote_ip"]},
+    "mac":        {"decision": "drop", "aliases": ["mac_addr", "dev_mac"]},
+    "gps":        {"decision": "drop", "aliases": ["lat", "lon", "location", "coords"]},
+    "temp_c":     {"decision": "keep"},
+    "hr_bpm":     {"decision": "hash"},
+    "batt_pct":   {"decision": "keep"},
+    "rssi_dbm":   {"decision": "keep"},
+    "uptime_s":   {"decision": "keep"}
+  }
+}

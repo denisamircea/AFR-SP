@@ -1,0 +1,123 @@
+{
+  "platform": {
+    "machine": "arm64",
+    "system": "Darwin-25.1.0-arm64-arm-64bit-Mach-O",
+    "python": "3.13.18"
+  },
+  "events": 86400,
+  "seed": 7,
+  "RAW": {
+    "bytes_per_record": 422.4,
+    "mb_per_day": 36.49,
+    "reduction_vs_raw_pct": 0.0,
+    "pii_values_stored": 604800,
+    "pii_values_total": 604800,
+    "latency_us_median": 3.88,
+    "latency_us_p99": 8.58,
+    "latency_us_mean": 4.08
+  },
+  "SK": {
+    "bytes_per_record": 458.4,
+    "mb_per_day": 39.6,
+    "reduction_vs_raw_pct": -8.52,
+    "pii_values_stored": 604800,
+    "pii_values_total": 604800,
+    "latency_us_median": 5.83,
+    "latency_us_p99": 11.33,
+    "latency_us_mean": 6.16,
+    "verify_full_day_s": 0.166
+  },
+  "MASK": {
+    "bytes_per_record": 382.6,
+    "mb_per_day": 33.06,
+    "reduction_vs_raw_pct": 9.41,
+    "pii_values_stored": 0,
+    "pii_values_total": 604800,
+    "latency_us_median": 5.5,
+    "latency_us_p99": 10.67,
+    "latency_us_mean": 5.81,
+    "verify_full_day_s": 0.131
+  },
+  "AFR-SP": {
+    "bytes_per_record": 90.0,
+    "mb_per_day": 7.78,
+    "reduction_vs_raw_pct": 78.69,
+    "pii_values_stored": 0,
+    "pii_values_total": 604800,
+    "latency_us_median": 5.96,
+    "latency_us_p99": 9.67,
+    "latency_us_mean": 6.15,
+    "checkpoint_bytes_total": 259200,
+    "mb_per_day_incl_checkpoints": 8.04,
+    "reduction_incl_checkpoints_pct": 77.98,
+    "latency_us_mean_incl_checkpoint": 7.32,
+    "verify_full_day_s": 0.302
+  },
+  "clean_verification_findings": {
+    "SK": 0,
+    "MASK": 0,
+    "AFR_SP": 0
+  },
+  "tamper": [
+    {
+      "scenario": "Alter one past record",
+      "SK": true,
+      "MASK": true,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Delete one record",
+      "SK": true,
+      "MASK": true,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Swap two adjacent records",
+      "SK": true,
+      "MASK": true,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Duplicate (replay) a record",
+      "SK": true,
+      "MASK": true,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Insert a forged record",
+      "SK": true,
+      "MASK": true,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Truncate the last 30 records",
+      "SK": false,
+      "MASK": false,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Delete the entire log",
+      "SK": false,
+      "MASK": false,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Roll back to an older consistent copy",
+      "SK": false,
+      "MASK": false,
+      "AFR_SP": true
+    },
+    {
+      "scenario": "Chain key leaked, past record rewritten (key-compromise)",
+      "SK": true,
+      "MASK": false,
+      "AFR_SP": true
+    }
+  ],
+  "tamper_detected": {
+    "SK": 6,
+    "MASK": 5,
+    "AFR_SP": 9
+  },
+  "tamper_total": 9
+}

@@ -1,0 +1,155 @@
+{
+  "platform": {
+    "cpu": "arm",
+    "python": "3.13.18",
+    "openssl": "OpenSSL 3.5.9 29 Sep 2026",
+    "os": "Darwin-25.1.0-arm64-arm-64bit-Mach-O"
+  },
+  "events": 86400,
+  "checkpoint_every": 60,
+  "raw": {
+    "mean_bytes": 422.3,
+    "min": 405,
+    "max": 526,
+    "total_bytes": 36484154
+  },
+  "afr": {
+    "record_bytes": 90,
+    "total_record_bytes": 7776000,
+    "checkpoint_bytes": 180,
+    "checkpoints": 1440,
+    "total_with_checkpoints": 8035200
+  },
+  "reduction_records_pct": 78.69,
+  "reduction_with_cp_pct": 77.98,
+  "pii": {
+    "distinct_pii_values": 370786,
+    "occurrences_in_output": 0
+  },
+  "latency_us": {
+    "median": 6.0,
+    "p99": 10.21,
+    "max": 71.5,
+    "mean": 6.22
+  },
+  "checkpoint_us": {
+    "median": 67.4,
+    "p99": 88.3
+  },
+  "verify_full_trace_s": 0.311,
+  "baseline_findings": [],
+  "outage": {
+    "ring_capacity_records": 2912,
+    "ring_minutes_at_1ev_s": 48.5,
+    "events_during_outage": 3600,
+    "records_dropped": 688,
+    "overflow_marker_chained": true
+  },
+  "tamper": [
+    {
+      "scenario": "Alter one historical record (StateHash byte)",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "seq 1234: HMAC mismatch (altered/forged/reordered)"
+    },
+    {
+      "scenario": "Alter timestamp of one record",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "seq 1234: HMAC mismatch (altered/forged/reordered)"
+    },
+    {
+      "scenario": "Delete one record from the middle",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "seq 1235: HMAC mismatch (altered/forged/reordered)"
+    },
+    {
+      "scenario": "Swap (reorder) two adjacent records",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "records out of order"
+    },
+    {
+      "scenario": "Replay/duplicate an earlier record",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "duplicate seq 1229"
+    },
+    {
+      "scenario": "Insert a forged record (random HMAC)",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "duplicate seq 1234"
+    },
+    {
+      "scenario": "Truncate tail (last 30 records), checkpoint kept",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 1439: 30 record(s) missing (seq 86370..86399)"
+    },
+    {
+      "scenario": "Delete entire log, checkpoints kept upstream",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 0: 60 record(s) missing (seq 0..59)"
+    },
+    {
+      "scenario": "Roll back log to an older consistent snapshot",
+      "attacker": "A1",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 720: 60 record(s) missing (seq 43200..43259)"
+    },
+    {
+      "scenario": "Rewrite an old record via the enclave append API",
+      "attacker": "A2",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "records out of order"
+    },
+    {
+      "scenario": "Upstream deletes latest checkpoint + its records",
+      "attacker": "A3",
+      "detected": false,
+      "expected_detect": false,
+      "finding": "-"
+    },
+    {
+      "scenario": "  ... detected once the node's next checkpoint arrives",
+      "attacker": "A3",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 1440: missing/replayed predecessor (expected #1439)"
+    },
+    {
+      "scenario": "Upstream deletes a middle checkpoint",
+      "attacker": "A3",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 6: missing/replayed predecessor (expected #5)"
+    },
+    {
+      "scenario": "Upstream replays an old checkpoint",
+      "attacker": "A3",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 3: missing/replayed predecessor (expected #10)"
+    },
+    {
+      "scenario": "Upstream edits a checkpoint root",
+      "attacker": "A3",
+      "detected": true,
+      "expected_detect": true,
+      "finding": "checkpoint 2: bad signature"
+    }
+  ]
+}

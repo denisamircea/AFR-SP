@@ -1,0 +1,63 @@
+{
+  "platform": {
+    "cpu": "arm",
+    "python": "3.13.18",
+    "openssl": "OpenSSL 3.5.9 29 Sep 2026",
+    "os": "Darwin-25.1.0-arm64-arm-64bit-Mach-O"
+  },
+  "events": 86400,
+  "checkpoint_every": 60,
+  "raw": {
+    "mean_bytes": 422.3,
+    "min": 405,
+    "max": 526,
+    "total_bytes": 36484154
+  },
+  "afr": {
+    "record_bytes": 90,
+    "total_record_bytes": 7776000,
+    "checkpoint_bytes": 180,
+    "checkpoints": 1440,
+    "total_with_checkpoints": 8035200
+  },
+  "reduction_records_pct": 78.69,
+  "reduction_with_cp_pct": 77.98,
+  "pii": {
+    "distinct_pii_values": 370786,
+    "occurrences_in_output": 0
+  },
+  "latency_us": {
+    "median": 6.0,
+    "p99": 10.21,
+    "max": 71.5,
+    "mean": 6.22
+  },
+  "checkpoint_us": {
+    "median": 67.4,
+    "p99": 88.3
+  },
+  "verify_full_trace_s": 0.311,
+  "baseline_findings": [],
+  "outage": {
+    "ring_capacity_records": 2912,
+    "ring_minutes_at_1ev_s": 48.5,
+    "events_during_outage": 3600,
+    "records_dropped": 688,
+    "overflow_marker_chained": true
+  }
+}
+[A1] Alter one historical record (StateHash byte)         detected=True   seq 1234: HMAC mismatch (altered/forged/reordered)
+[A1] Alter timestamp of one record                        detected=True   seq 1234: HMAC mismatch (altered/forged/reordered)
+[A1] Delete one record from the middle                    detected=True   seq 1235: HMAC mismatch (altered/forged/reordered)
+[A1] Swap (reorder) two adjacent records                  detected=True   records out of order
+[A1] Replay/duplicate an earlier record                   detected=True   duplicate seq 1229
+[A1] Insert a forged record (random HMAC)                 detected=True   duplicate seq 1234
+[A1] Truncate tail (last 30 records), checkpoint kept     detected=True   checkpoint 1439: 30 record(s) missing (seq 86370..86399)
+[A1] Delete entire log, checkpoints kept upstream         detected=True   checkpoint 0: 60 record(s) missing (seq 0..59)
+[A1] Roll back log to an older consistent snapshot        detected=True   checkpoint 720: 60 record(s) missing (seq 43200..43259)
+[A2] Rewrite an old record via the enclave append API     detected=True   records out of order
+[A3] Upstream deletes latest checkpoint + its records     detected=False  -
+[A3]   ... detected once the node's next checkpoint arrives detected=True   checkpoint 1440: missing/replayed predecessor (expected #1439)
+[A3] Upstream deletes a middle checkpoint                 detected=True   checkpoint 6: missing/replayed predecessor (expected #5)
+[A3] Upstream replays an old checkpoint                   detected=True   checkpoint 3: missing/replayed predecessor (expected #10)
+[A3] Upstream edits a checkpoint root                     detected=True   checkpoint 2: bad signature
